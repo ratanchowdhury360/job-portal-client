@@ -1,49 +1,49 @@
-import Lottie from 'lottie-react';
-
-
-import registerLottie from '../../../assets/lotties/register.json'
-import { use } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthContext';
+import Lottie from 'lottie-react';
+import signInLottie from '../../../assets/lotties/register.json'
 
-const Register = () => {
+const LogIn = () => {
 
-      const {createUser} = use(AuthContext);
-
-       const handleRegister = e =>{
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password)
-
-        // create user
-        createUser(email, password)
-        .then(result =>{
+    const {signInUser} = useContext(AuthContext);
+    
+    
+        const handleSignIn = e =>{
+            e.preventDefault();
+            const form = e.target;
+            const email = form.email.value;
+            const password = form.password.value;
+            console.log(email, password)
+    
+            // sign in user
+           signInUser(email, password)
+           .then(result =>{
             console.log(result.user)
-        })
-        .catch(error =>{
+           })
+           .catch(error => {
             console.log(error)
-        })
-
-    }
+           })
+    
+    
+        } 
 
     return (
         <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <Lottie style={{width: '200px'}} animationData={registerLottie}  loop={true} ></Lottie>
+            <Lottie style={{width: '200px'}} animationData={signInLottie}  loop={true} ></Lottie>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
-            <h1 className="text-5xl font-bold">Register now!</h1>
-              <form onSubmit={handleRegister} >
+            <h1 className="text-5xl font-bold">Sign In now!</h1>
+              <form onSubmit={handleSignIn}>
               <fieldset className="fieldset">
                 <label className="label">Email</label>
                 <input type="email" name="email" className="input" placeholder="Email" />
                 <label className="label">Password</label>
                 <input type="password" name='password' className="input" placeholder="Password" />
                 <div><a className="link link-hover">Forgot password?</a></div>
-                <button   className="btn btn-neutral mt-4">Register</button>
+                <button className="btn btn-neutral mt-4">SignIn</button>
               </fieldset>
 
               </form>
@@ -54,4 +54,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default LogIn;
