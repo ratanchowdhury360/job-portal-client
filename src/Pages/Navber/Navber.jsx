@@ -5,8 +5,7 @@ const Navber = () => {
 
     const navLinks1 = (
         <>
-            <NavLink to={'./'}><li><a>Home</a></li></NavLink>
-            <NavLink to={'./about'}><li><a>About</a></li></NavLink>
+             <li><NavLink to="/">Home</NavLink></li>
 
         </>
     );
@@ -35,7 +34,7 @@ const Navber = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <NavLink className="btn" to="/register">Register</NavLink>
                 </div>
             </div>
         </div>
