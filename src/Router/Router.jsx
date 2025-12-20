@@ -3,6 +3,7 @@ import Root from "../Root/Root";
 import Home from "../Pages/Home/Home/Home";
 import Register from "../Pages/Shared/Register/Register";
 import LogIn from "../Pages/Shared/LogIn/LogIn";
+import JobDetails from "../Pages/JobDetails/JobDetails";
 
 
 
@@ -23,7 +24,11 @@ export const router = createBrowserRouter([
       {
         path: 'signIn',
         Component: LogIn
-      }
+      },
+      {
+        path: '/jobs/:id',
+        Component: JobDetails
+      },
 
     ]
   },
