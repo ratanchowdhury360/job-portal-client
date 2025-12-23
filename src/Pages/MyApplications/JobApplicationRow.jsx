@@ -1,7 +1,14 @@
 import React from 'react';
 
-const JobApplicationRow = ({ application, index }) => {
-    const { company, title, company_logo } = application;
+const JobApplicationRow = ({ application, index, onDelete, isDeleting }) => {
+    const { company, title, company_logo, _id } = application;
+    
+    const handleDelete = () => {
+        if (onDelete) {
+            onDelete(_id);
+        }
+    };
+
     return (
         <tr>
             <th>
@@ -15,7 +22,7 @@ const JobApplicationRow = ({ application, index }) => {
                         <div className="mask mask-squircle h-12 w-12">
                             <img
                                 src={company_logo}
-                                alt="Avatar Tailwind CSS Component" />
+                                alt={`${company} logo`} />
                         </div>
                     </div>
                     <div>
@@ -25,13 +32,24 @@ const JobApplicationRow = ({ application, index }) => {
                 </div>
             </td>
             <td>
-                Zemlak, Daniel and Leannon
+                {company}
                 <br />
-                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                <span className="badge badge-ghost badge-sm">{title}</span>
             </td>
-            <td>Purple</td>
+            <td>
+                <span className="badge badge-success badge-sm">Applied</span>
+            </td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                <div className="flex gap-2">
+                    <button className="btn btn-ghost btn-xs">details</button>
+                    <button 
+                        className="btn btn-error btn-xs"
+                        onClick={handleDelete}
+                        disabled={isDeleting}
+                    >
+                        {isDeleting ? 'Deleting...' : 'Delete'}
+                    </button>
+                </div>
             </th>
         </tr>
     );
