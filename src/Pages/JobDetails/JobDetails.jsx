@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link, useLoaderData } from 'react-router';
 
 const JobDetails = () => {
@@ -17,19 +17,20 @@ const JobDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      
+
       {/* Header Card */}
       <div className="card bg-base-100 shadow-xl mb-8">
         <div className="card-body md:flex md:flex-row md:items-center gap-6">
-          
+
           {/* Company Logo */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <img
               src={company_logo || 'https://via.placeholder.com/120'}
               alt={company}
               className="w-24 h-24 object-contain rounded"
             />
           </div>
+
 
           {/* Job Info */}
           <div className="flex-1">
