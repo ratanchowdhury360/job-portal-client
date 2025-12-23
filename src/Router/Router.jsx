@@ -7,6 +7,8 @@ import JobDetails from "../Pages/JobDetails/JobDetails";
 import JobApply from "../Pages/JobApply/JobApply";
 import PrivateRoute from "../Routes/PrivateRoute";
 import MyApplications from "../Pages/MyApplications/MyApplications";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import AddJob from "../Pages/AddJob/AddJob";
 
 
 
@@ -15,6 +17,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -40,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: 'myApplications',
         element: <PrivateRoute><MyApplications></MyApplications></PrivateRoute>
+      },
+      {
+        path: 'addJob',
+        element: <PrivateRoute><AddJob></AddJob></PrivateRoute>
       },
 
     ]
