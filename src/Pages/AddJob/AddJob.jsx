@@ -1,13 +1,29 @@
 import React from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const AddJob = () => {
+
+    const { user } = useAuth();
 
     const handleAddAJob = e => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        console.log(data);
+        // process salary range data
+        const { min, max, currency, ...newJob } = data;
+        newJob.salaryRange = { min, max, currency }
+
+        // process requirements
+        const requirementsString = newJob.requirements;
+        const requirementsDirty = requirementsString.split(',')
+        const requirementsClean = requirementsDirty.map(req => req.trim());
+        newJob.requirements = requirementsClean;
+
+        // process responsibilities
+        newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim())
+
+        console.log(newJob)
     }
     return (
         <div>
@@ -36,9 +52,9 @@ const AddJob = () => {
                     <legend className="fieldset-legend">Job Type</legend>
                     <div className="filter">
                         <input className="btn filter-reset" type="radio" name="jobType" aria-label="All" />
-                        <input className="btn" type="radio" name="jobType" aria-label="On-Site" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Remote" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Hybrid" />
+                        <input className="btn" type="radio" name="jobType" value="On-Site" aria-label="On-Site" />
+                        <input className="btn" type="radio" name="jobType" value="Remote" aria-label="Remote" />
+                        <input className="btn" type="radio" name="jobType" value="Hybrid" aria-label="Hybrid" />
                     </div>
 
                 </fieldset>
@@ -69,7 +85,7 @@ const AddJob = () => {
                     <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
                         <div>
                             <label className="label">Minimum Salary</label>
-                            <input type="text" name='min'className="input" placeholder="Minimum Salary" />
+                            <input type="text" name='min' className="input" placeholder="Minimum Salary" />
                         </div>
 
                         <div>
@@ -89,7 +105,7 @@ const AddJob = () => {
                     </div>
                 </fieldset>
 
-                 {/* Job Responsibilities  */}
+                {/* Job Responsibilities  */}
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
                     <legend className="fieldset-legend">Job Responsibilities</legend>
 
@@ -105,7 +121,7 @@ const AddJob = () => {
                     <input type="text" name='hr_name' className="input" placeholder="HR Name" />
 
                     <label className="label">HR Email</label>
-                    <input type="email" name='company' className="input" placeholder="HR Email" />
+                    <input type="email" name='hr_email' defaultValue={user.email} className="input" placeholder="HR Email" />
                 </fieldset>
 
                 <input type="submit" className='btn' value="Add Job" />
